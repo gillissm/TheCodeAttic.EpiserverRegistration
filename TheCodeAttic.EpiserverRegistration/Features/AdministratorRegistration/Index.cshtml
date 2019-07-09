@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+
+@using TheCodeAttic.EpiserverRegistration.Features.AdministratorRegistration
+
+@model RegisterViewModel
+@{
+    Layout = "";
+}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Create Administrator Account</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h2>Create Administrator Account</h2>
+                @if (Model.RegistrationNotAllowed)
+                {
+                    <div>
+                        The maximum number of allowed users has been created via the registration page.
+
+                        Please leverage other methods to creating user accounts.
+
+                        <a href="/episerver" class="btn btn-info">Go to Episerver CMS</a>
+                     </div>
+                }
+                else
+                {
+                using (Html.BeginForm("/", "AdminRegistration", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Username)
+                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Username)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword)
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                    </div>
+                    <div class="form-group">
+                        @Html.ValidationMessage(AdminRegistrationController.ErrorKey)
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="" value="Register" />
+                    </div>
+                }
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>
