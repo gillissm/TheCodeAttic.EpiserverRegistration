@@ -9,7 +9,6 @@ namespace TheCodeAttic.EpiserverRegistration.Features.AdministratorRegistration
 {
     [InitializableModule]
     [ModuleDependency(typeof(EPiServer.Web.InitializationModule))]
-   //[ModuleDependency(typeof(TheCodeAttic.EpiserverRegistration.Features.ServiceLocatorResolver.DependencyResolverInitialization))]
     public class AdminRegistrationRouteInitialization : IInitializableModule
     {
         /// <summary>
@@ -30,7 +29,9 @@ namespace TheCodeAttic.EpiserverRegistration.Features.AdministratorRegistration
             }
         }
 
-        //Unused in this implementation but required as part of the IInitializableModule interface
+        /// <summary>
+        /// Unused in this implementation but required as part of the IInitializableModule interface
+        /// </summary>
         public void Uninitialize(InitializationEngine context)
         {
             //Add uninitialization logic
